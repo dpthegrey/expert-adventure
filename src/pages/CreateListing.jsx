@@ -114,7 +114,7 @@ function CreateListing() {
       geolocation.lng = longitude;
     }
 
-    // Store images in firebase storage
+    // Store image in firebase
     const storeImage = async (image) => {
       return new Promise((resolve, reject) => {
         const storage = getStorage();
@@ -137,6 +137,8 @@ function CreateListing() {
               case "running":
                 console.log("Upload is running");
                 break;
+              default:
+                break;
             }
           },
           (error) => {
@@ -146,7 +148,7 @@ function CreateListing() {
             // Handle successful uploads on complete
             // For instance, get the download URL: https://firebasestorage.googleapis.com/...
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              resolve("File available at", downloadURL);
+              resolve(downloadURL);
             });
           }
         );
